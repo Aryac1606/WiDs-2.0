@@ -1,0 +1,20 @@
+1. The Goal
+Predicting the stock market is often called a "random walk," but for this project, I wanted to see if we could find a pattern in the chaos. I took Tesla's (TSLA) historical data and put two very different "brains" to work: ARIMA, a classic statistical model used by economists for decades, and LSTM, a modern deep-learning neural network designed to mimic human-like memory.
+2. Setting the Stage (Preprocessing)
+Before the models could learn, I had to "clean the room."Consistency: I filled in missing dates (like weekends and holidays) to ensure a smooth timeline.Preparation: For the LSTM "brain," I had to scale all the prices between 0 and 1. Neural networks struggle with big numbers like $400, so this "normalization" helped the model focus on the percentage of movement rather than the raw dollar amount.The 60-Day Memory: I set up the LSTM to look at the last 60 days of history to predict what happens on day 61—essentially giving the model a "two-month memory" to find trends.
+3. Meet the Models
+The Traditionalist: ARIMA (2, 1, 2)ARIMA is like a math-heavy accountant. It looks at past averages and errors to guess the next step. Through a "Grid Search," I found that the optimal settings for Tesla were (2, 1, 2), which helped it understand the basic "momentum" of the stock.The Modernist: LSTMThe LSTM is more like a detective. It has layers of "neurons" that decide which past events are important to remember and which are just noise. I added "Dropout" layers, which act like a filter to prevent the model from getting too distracted by tiny, irrelevant price wiggles (overfitting).
+4. The Results
+Average Error (MAE) 
+ARIMA - $67.57
+LSTM - Significantly Lower
+Typical Miss (RMSE)
+ARIMA - $78.83
+LSTM - Much Closer to Reality
+Percentage Error
+ARIMA - 33.09%
+LSTM - Closer to 10-15%
+5. Analysis
+When I looked at the graphs, the difference was clear:ARIMA played it safe. It basically predicted a flat line, suggesting that the most likely future was just a continuation of the average price. It completely missed the massive "breakout" Tesla had in late 2024.LSTM followed the mood. It was much better at "feeling" the momentum. While it wasn't perfect, it followed the upward and downward swings of the actual market much more closely.
+6. Final Conclusion
+The takeaway from this project is that ARIMA is great for stability, but LSTM is built for the "real world" of stocks.ARIMA told me where the stock should be if everything stayed normal, but LSTM actually tried to follow where the stock was going. For a volatile company like Tesla, the deep-learning approach of the LSTM is clearly the more powerful tool, as it can handle the non-linear, "emotional" jumps that define modern trading.
